@@ -27,7 +27,6 @@ app = Flask(__name__)
 def show_welcome():
     return render_template("pages/welcome.jinja")
 
-
 #-----------------------------------------------------------
 # Creature list page - Show all the creatures
 #-----------------------------------------------------------
@@ -41,7 +40,7 @@ def show_all_creatures():
         params = ()
         creatures = db.execute(sql, params).fetchall()
 
-        return render_template("pages/creature_list.jinja", creatures=creatures)
+        return render_template("pages/creature/list.jinja", creatures=creatures)
 
 
 #-----------------------------------------------------------
@@ -56,6 +55,20 @@ def show_help():
     flash("Error test message", "error")
 
     return render_template("pages/help.jinja")
+
+#-----------------------------------------------------------
+# New Creature form
+#-----------------------------------------------------------
+@app.get("/creature/new")
+def show_creature_form():
+    return render_template("pages/creature_form.jinja")
+
+#-----------------------------------------------------------
+# Handel the creature form
+#-----------------------------------------------------------
+@app.post("/creature/new")
+def process_creature_form():
+    print(reqeust.form)
 
 
 #===========================================================
