@@ -40,7 +40,7 @@ def show_all_creatures():
         params = ()
         creatures = db.execute(sql, params).fetchall()
 
-        return render_template("pages/creature/list.jinja", creatures=creatures)
+        return render_template("pages/creature_list.jinja", creatures=creatures)
 
 
 #-----------------------------------------------------------
@@ -68,8 +68,25 @@ def show_creature_form():
 #-----------------------------------------------------------
 @app.post("/creature/new")
 def process_creature_form():
-    print(reqeust.form)
+    #get form data
+    species = request.form.get("species", "unknown").strip() #defult value if no species
+    name = request.form.get("name", "unknown").strip()
 
+    #connect to the DB
+    with connect_db() as db:
+        sql = """
+            INSERT INTO creatures (species, name)
+            VALUES (?, ?)
+        """
+        params = (species, name)
+
+        #run qeury
+        db.execute(sql, params)
+
+        flash(f"Creature {name} added successfully")
+
+        #done, return to list
+        return redirect("/creatures")
 
 #===========================================================
 # Configure the app
