@@ -42,6 +42,24 @@ def show_all_creatures():
 
         return render_template("pages/creature_list.jinja", creatures=creatures)
 
+#-----------------------------------------------------------
+# Creature deletion
+#-----------------------------------------------------------
+@app.get("/creature/<int:id>/delete")
+def delete_a_creatures(id):
+    with connect_db() as db:
+        ##delete creature using its id
+        sql = """
+            DELETE FROM creatures
+            WHERE id=?
+        """
+        params = (id,)
+        db.execute(sql, params)
+
+
+        flash("Creature deleted", "success")
+##back to list
+        return redirect("/creatures")
 
 #-----------------------------------------------------------
 # Help page - Show some help

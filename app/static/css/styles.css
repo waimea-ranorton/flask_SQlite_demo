@@ -4,14 +4,14 @@
 ===========================================================*/
 
 :root {
-    --text-col:         #244;
+    --text-col:         rgb(28, 83, 71);
 
-    --back-col:         #dff;
-    --back-col-dark:    #bdd;
+    --back-col:         rgb(169, 233, 214);
+    --back-col-dark:    rgb(141, 201, 178);
 
-    --border-col:       #355;
+    --border-col:       rgb(92, 168, 151);
 
-    --accent-col:       #e43;
+    --accent-col:       rgb(145, 26, 52);
 }
 
 
@@ -44,6 +44,7 @@ body > header {
     gap: 1rem;
     align-items: center;
     padding: 1rem;
+    background-color: var(--back-col-dark);
 
     .logo {
         width: 2rem;
@@ -106,6 +107,8 @@ main > h2 {
 
         h3 {
             color: var(--accent-col);
+            text-align: center;
+         
         }
     }
 }
@@ -138,3 +141,6 @@ form {
     }
 }
 
+a:link {
+    color: var(--text-col);
+}
